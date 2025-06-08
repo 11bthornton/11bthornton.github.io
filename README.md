@@ -4,6 +4,34 @@ The thing I miss most about university, by some margin, is my programming langua
 
 Despite having written my bachelor’s thesis on Rust and worked with it professionally, I am still regularly impressed and fascinated by the language’s design. Its affine type system and the concept of ownership force you to solve problems in ways that go against the grain of garbage-collected programming languages. Its roots in functional programming, such as ad-hoc polymorphism, algebraic data types, and first-class functions, provide an expressive foundation. That is all before we even get to declarative and procedural macros, a system so powerful you can write your own DSLs or automate boilerplate with surgical precision.
 
+For those who haven’t written Rust before, one of its core premises is its **affine type system**.
+
+Consider the following C# code:
+
+```csharp
+var x = new SomeType();
+var y = process(x);
+Console.WriteLine(x);
+```
+
+This works fine because `process` receives a **reference** to `x`, leaving `x` itself untouched and accessible afterwards.
+
+In Rust, however, the equivalent code would fail to compile:
+
+```rust
+let x = String::from("Hello, world!");
+let y = process(x);
+println!("{}", x); // error: use of moved value `x`
+```
+
+This happens because Rust’s `process` function takes **ownership** of the data previously owned by `x`. When `process` finishes, Rust automatically runs the destructor on that data. The original binding `x` is no longer valid because ownership has been transferred and can only be held by one place at a time. This doesn't happen for types that opt into "copy-semantics", but we'll ignore those for now.
+
+This is what we mean by affine types, you can use a piece of data **at most once**. Contrast this with languages like C#, where you can use a value many times through references, which can blur the question of who “owns” the data.
+
+Affine types model real-world ownership more naturally. If I have a coin and give it to you, I no longer possess that coin. In C# style semantics, it is as if we both have a claim to the same coin at the same time, which can lead to confusion and bugs, like double spending or data races.
+
+Rust’s ownership system enforces this constraint at compile time, preventing many classes of runtime errors related to memory and concurrency.
+
 Yes, Rust offers impressive guarantees over memory safety and "fearless concurrency". But development with it is not without trade-offs. Criticism about the maturity of its ecosystem: *"Rust is not ready for front-end", "There is no GUI story"*, and so on, often rings true. But I see those not as limitations, but as challenges, the sort I would have relished as a student and miss now.
 
 I am by no means a front-end artist (so do not judge), but it turns out you can now write some pretty fast WebAssembly applications. The demo I have been working on takes UDP packets from the F1 series of video games, parses them, maps them over a WebSocket, and updates the DOM more than 60 times per second. Throw in a bit of matrix maths to map car coordinates onto a 2D track map, and you have a web-based live telemetry dashboard rendered entirely in the browser. It is all vanilla HTML and CSS on the front-end. Everything else is written in Rust. I built it after running into persistent latency issues with JavaScript and React-based solutions.
