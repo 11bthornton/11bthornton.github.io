@@ -10,4 +10,6 @@ I am by no means a front-end artist (so do not judge), but it turns out you can 
 
 Because Rust is a systems language, I have also been able to reuse some of the underlying logic in embedded targets, for example, driving custom rev lights or speedometers on racing wheels.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0DpGJS9nseI" title="Rust WASM F1 Telemetry Dashboard" frameborder="0" allowfullscreen></iframe>
+
 > 💡 P.S. The model library used for parsing game data is [open-source](https://github.com/11bthornton/f1-game-library-models) and also available on [crates.io](https://crates.io/crates/f1-game-library-models).
