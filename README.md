@@ -32,6 +32,15 @@ Affine types model real-world ownership more naturally. If I have a coin and giv
 
 Rust’s ownership system enforces this constraint at compile time, preventing many classes of runtime errors related to memory and concurrency.
 
+You get around this limitation by letting scopes borrow data, either immutably or mutably. You can give out as many immutable references as you want, provided no mutable references exist. On the other hand, you can only provide one mutable reference at a time.
+
+Since data races are caused by two things, aliasing and mutability, this type system effectively prevents data races from ever occurring in your program at compile time. This is neat and allows you to avoid some very common, nasty, and hard-to-debug bugs.
+
+The point I am trying to make though, is that this level of abstraction and altered way of thinking makes traditional software tasks, especially GUI programming, quite tiresome. It can be hard to get the compiler to do what you want without it constantly flagging errors and complaining.
+
+This is why a project like mine has been so rewarding. Rust for the web is not new, but pushing it to achieve tangible and effective results is what makes it exciting.
+
+
 Yes, Rust offers impressive guarantees over memory safety and "fearless concurrency". But development with it is not without trade-offs. Criticism about the maturity of its ecosystem: *"Rust is not ready for front-end", "There is no GUI story"*, and so on, often rings true. But I see those not as limitations, but as challenges, the sort I would have relished as a student and miss now.
 
 I am by no means a front-end artist (so do not judge), but it turns out you can now write some pretty fast WebAssembly applications. The demo I have been working on takes UDP packets from the F1 series of video games, parses them, maps them over a WebSocket, and updates the DOM more than 60 times per second. Throw in a bit of matrix maths to map car coordinates onto a 2D track map, and you have a web-based live telemetry dashboard rendered entirely in the browser. It is all vanilla HTML and CSS on the front-end. Everything else is written in Rust. I built it after running into persistent latency issues with JavaScript and React-based solutions.
@@ -41,3 +50,5 @@ Because Rust is a systems language, I have also been able to reuse some of the u
 <iframe width="560" height="315" src="https://www.youtube.com/embed/0DpGJS9nseI" title="Rust WASM F1 Telemetry Dashboard" frameborder="0" allowfullscreen></iframe>
 
 > 💡 P.S. The model library used for parsing game data is [open-source](https://github.com/11bthornton/f1-game-library-models) and also available on [crates.io](https://crates.io/crates/f1-game-library-models).
+
+If you want to learn more, Jon Gjenset is a great educator on YouTube.
