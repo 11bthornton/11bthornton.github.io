@@ -1,1 +1,13 @@
-# 11bthornton.github.io
+# Pushing Rust outside of its comfort zone
+
+The thing I miss most about university — by some margin — is my programming language theory classes. Within the confines of seemingly restrictive languages, some neat, weird, and wonderfully wacky solutions can emerge. Creativity born of constraint feels like a universal phenomenon, but it was recently brought into sharp focus when I came across a compile-time Sudoku checker written solely using Rust’s type system ([Reddit link](https://www.reddit.com/r/rust/comments/1kvpdxz/sudoku_checker_in_rust_type_system/)). Naturally, the comments pointed me toward something even more unhinged: an implementation of Doom, written entirely with TypeScript types ([Reddit link](https://www.reddit.com/r/programming/comments/1iyqeu7/typescript_types_can_run_doom/)).
+
+Despite having written my bachelor’s thesis on Rust and worked with it professionally, I’m still regularly impressed — and fascinated — by the language’s design. Its affine type system and the concept of ownership force you to solve problems in ways that go against the grain of garbage-collected programming languages. Its roots in functional programming (ad-hoc polymorphism, algebraic data types, and first-class functions) provide an expressive foundation. That’s all before we even get to declarative and procedural macros — a system so powerful you can write your own DSLs or automate boilerplate with surgical precision.
+
+Yes, Rust offers impressive guarantees over memory safety and “fearless concurrency.” But development with it isn’t without trade-offs. Criticism about the maturity of its ecosystem — *“Rust isn’t ready for front-end,” “There’s no GUI story,”* etc. — often rings true. But I see those not as limitations, but as challenges. The sort I would have relished as a student — and miss now.
+
+I’m by no means a front-end artist (so don’t judge), but it turns out you can now write some pretty fast WebAssembly applications. The demo I’ve been working on takes UDP packets from the F1 series of video games, parses them, maps them over a WebSocket, and updates the DOM more than 60 times per second. Throw in a bit of matrix math to map car coordinates onto a 2D track map, and you’ve got yourself a web-based live telemetry dashboard — rendered entirely in-browser. It’s all vanilla HTML and CSS on the front-end. Everything else is written in Rust. I built it after running into persistent latency issues with JS/React-based solutions.
+
+Because Rust is a systems language, I’ve also been able to reuse some of the underlying logic in embedded targets — for example, driving custom rev lights or speedometers on racing wheels.
+
+> 💡 P.S. The model library used for parsing game data is [open-source](https://github.com/11bthornton/f1-game-library-models) and also available on [crates.io](https://crates.io/crates/f1-game-library-models).
