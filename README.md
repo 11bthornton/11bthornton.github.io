@@ -21,9 +21,17 @@ This works fine because `process` receives a **reference** to `x`, leaving `x` i
 In Rust, however, the equivalent code would fail to compile:
 
 ```rust
-let x = String::from("Hello, world!");
-let y = process(x);
-println!("{}", x); // error: use of moved value `x`
+fn main()
+{
+  let x = String::from("Hello, world!");
+  let y = process(x);
+  println!("{}", x); // error: use of moved value `x`
+}
+
+fn process(x: String) {
+  // Doesn't matter what this does,
+  // x gets dropped when it leaves this function's scope
+}
 ```
 
 This happens because Rust’s `process` function takes **ownership** of the data previously owned by `x`. When `process` finishes, Rust automatically runs the destructor on that data. The original binding `x` is no longer valid because ownership has been transferred and can only be held by one place at a time. This does not apply to types that opt into "copy semantics", but we will ignore those here.
