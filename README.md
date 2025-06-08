@@ -4,6 +4,8 @@ The thing I miss most about university, by some margin, is my programming langua
 
 Despite having written my bachelor’s thesis on Rust and worked with it professionally, I am still regularly impressed and fascinated by the language’s design. Its affine type system and the concept of ownership force you to solve problems in ways that go against the grain of garbage-collected programming languages. Its roots in functional programming, including ad-hoc polymorphism, algebraic data types, and first-class functions, provide an expressive foundation. That is all before we even get to declarative and procedural macros, a system so powerful you can write your own DSLs or automate boilerplate with surgical precision.
 
+I wanted to see how far I could push Rust in a domain where it’s not often the first choice: real-time web applications. That led me to build a telemetry dashboard for the F1 games series, fully in Rust, without a single line of JavaScript.
+
 For those who haven’t written Rust before, one of its core premises is its **affine type system**.
 
 Consider the following C# code:
